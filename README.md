@@ -82,7 +82,7 @@ ng serve
 ## Related Resources
 
 🎥 YouTube Tutorial (FormValueControl Experiment)
-https://youtu.be/COMING_SOON
+https://youtu.be/FN0PcwGa7ts
 
 🎥 Original Tutorial – Scalable Signal Form Composition
 https://youtu.be/hgy3t9mFmuc
