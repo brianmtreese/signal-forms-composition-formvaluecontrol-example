@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { form, submit } from '@angular/forms/signals';
+import { form, FormField, submit } from '@angular/forms/signals';
 import { signal } from '@angular/core';
-import { createAccountModel, buildAccountSection, Account } from '../../account/account-form/account-form.model';
-import { createAddressModel, buildAddressSection, Address } from '../../shipping/address-form/address-form.model';
-import { createPreferencesModel, buildPreferencesSection, Preferences } from '../../account/preferences-form/preferences-form.model';
+import { AccountModel, Account, buildAccountSection } from '../../account/account-form/account-form.model';
+import { buildAddressSection, Address, AddressModel } from '../../shipping/address-form/address-form.model';
+import { buildPreferencesSection, Preferences, PreferencesModel } from '../../account/preferences-form/preferences-form.model';
 import { AccountFormComponent } from '../../account/account-form/account-form.component';
 import { AddressFormComponent } from '../../shipping/address-form/address-form.component';
 import { PreferencesFormComponent } from '../../account/preferences-form/preferences-form.component';
 import { DebugPanelComponent } from '../../shared/debug-panel/debug-panel.component';
 
-// Profile form model interface
 interface Profile {
   account: Account;
   shippingAddress: Address;
@@ -24,20 +23,18 @@ interface Profile {
     AccountFormComponent,
     AddressFormComponent,
     PreferencesFormComponent,
-    DebugPanelComponent
+    DebugPanelComponent,
+    FormField
   ],
 })
 export class ProfileFormComponent {
-  // Create the parent model
   readonly model = signal<Profile>({
-    account: createAccountModel()(),
-    shippingAddress: createAddressModel()(),
-    preferences: createPreferencesModel()()
+    account: AccountModel,
+    shippingAddress: AddressModel,
+    preferences: PreferencesModel
   });
 
-  // Compose the form using section builders
   readonly form = form(this.model, s => {
-    // Build each section using their respective builders
     buildAccountSection(s.account);
     buildAddressSection(s.shippingAddress);
     buildPreferencesSection(s.preferences);
@@ -48,8 +45,6 @@ export class ProfileFormComponent {
     event.preventDefault();
     submit(this.form, async data => {
       console.log('Form submitted:', data().value());
-      // Return undefined if submission is successful
-      // Return validation errors if there are server-side errors
       return undefined;
     });
   }

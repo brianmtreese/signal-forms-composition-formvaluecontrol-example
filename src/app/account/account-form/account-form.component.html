@@ -3,14 +3,17 @@
   <div class="field-group">
     <label>
       First Name
-      <input type="text" [field]="form().firstName" />
-      <app-validation-errors [fieldState]="form().firstName()" />
+      <!-- <input type="text" [formField]="form().firstName" /> -->
+      <input type="text" [formField]="form.firstName" />
+      <!-- <app-validation-errors [fieldState]="form().firstName()" /> -->
+      <app-validation-errors [fieldState]="form.firstName()" />
     </label>
     <label>
       Last Name
-      <input type="text" [field]="form().lastName" />
-      <app-validation-errors [fieldState]="form().lastName()" />
+      <!-- <input type="text" [formField]="form().lastName" /> -->
+      <input type="text" [formField]="form.lastName" />
+      <!-- <app-validation-errors [fieldState]="form().lastName()" /> -->
+      <app-validation-errors [fieldState]="form.lastName()" />
     </label>
   </div>
 </div>
-

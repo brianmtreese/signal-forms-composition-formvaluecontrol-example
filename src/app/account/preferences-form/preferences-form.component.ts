@@ -1,14 +1,18 @@
-import { Component, input } from '@angular/core';
-import { Field, FieldTree } from '@angular/forms/signals';
-import { Preferences } from './preferences-form.model';
+import { Component, model } from '@angular/core';
+import { form, FormField, FormValueControl } from '@angular/forms/signals';
+import { Preferences, PreferencesModel } from './preferences-form.model';
 
 @Component({
   selector: 'app-preferences-form',
   templateUrl: './preferences-form.component.html',
   styleUrls: ['./preferences-form.component.scss'],
-  imports: [Field],
+  imports: [FormField],
 })
-export class PreferencesFormComponent {
-  readonly form = input.required<FieldTree<Preferences>>();
+// export class PreferencesFormComponent {
+export class PreferencesFormComponent implements FormValueControl<Preferences> {
+  // readonly form = input.required<FieldTree<Preferences>>();
+  value = model<Preferences>(PreferencesModel);
+
+  protected form = form(this.value);
 }
 
